@@ -1,0 +1,68 @@
+<!-- components/navbar/navbar.liquid -->
+
+<!-- Styles -->
+{{ 'navbar.css' | asset_url | stylesheet_tag }}
+
+<nav class="navbar" role="navigation">
+  <div class="navbar__container">
+    <!-- Logo -->
+    <a href="{{ routes.root_url }}" class="navbar__logo">
+      {% if settings.logo != blank %}
+        {{ settings.logo | image_url: width: 200 | image_tag: alt: shop.name }}
+      {% else %}
+        {{ shop.name }}
+      {% endif %}
+    </a>
+
+    <!-- Navigation -->
+    <ul class="navbar__links">
+      {% for link in linklists[settings.main_menu].links %}
+        <li>
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <!-- Icons -->
+    <div class="navbar__icons">
+      <a href="{{ routes.account_url }}" class="navbar__icon" aria-label="Account">
+        <svg class="icon">
+          <use xlink:href="#icon-user" />
+        </svg>
+      </a>
+      <a href="{{ routes.cart_url }}" class="navbar__icon" aria-label="Cart">
+        <svg class="icon">
+          <use xlink:href="#icon-cart" />
+        </svg>
+        <span class="navbar__cart-count" id="CartCount">{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Script -->
+<script src="{{ 'navbar.js' | asset_url }}" defer></script>
+
+<!-- Schema -->
+{% schema %}
+{
+  "name": "Navbar",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Main navigation menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Navbar Default"
+    }
+  ]
+}
+{% endschema %}
