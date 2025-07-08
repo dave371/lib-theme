@@ -13,10 +13,20 @@
   "sections": {
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "menu": ""
+      }
+    },
+    "navbar_NyVYLP": {
+      "type": "navbar",
+      "name": "Navbar Default",
+      "settings": {
+        "main_menu": "main-menu"
+      }
     }
   },
   "order": [
-    "header"
-  ],
+    "header",
+    "navbar_NyVYLP"
+  ]
 }
